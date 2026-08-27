@@ -2,6 +2,7 @@
 /* Author: ∆RafaelVerboΩ — RAFCODE-Φ */
 
 #include "raf_syscall_linux.h"
+#include "raf_json_syntax.h"
 
 typedef unsigned char raf_u8;
 typedef unsigned int raf_u32;
@@ -74,6 +75,7 @@ struct raf_parser {
 
 static raf_u8 g_buffer[RAF_BUFFER_SIZE];
 static struct raf_parser g_parser;
+static struct raf_json_syntax g_syntax;
 
 static raf_u32 raf_strlen(const char *s) {
     raf_u32 n = 0U;
@@ -323,11 +325,11 @@ static void raf_out_bool(raf_u32 value) {
     else raf_out("false");
 }
 
-static void raf_emit_receipt(const struct raf_parser *p) {
+static void raf_emit_receipt(const struct raf_parser *p, const struct raf_json_syntax *syntax) {
     raf_out("{\n");
-    raf_out("  \"schema\":\"rafcodephi.freestanding.stream-json-receipt.v1\",\n");
+    raf_out("  \"schema\":\"rafcodephi.freestanding.stream-json-receipt.v2\",\n");
     raf_out("  \"evidence_class\":\"MEASURED_LOCAL\",\n");
-    raf_out("  \"parser_scope\":\"structural_scan_not_full_json_semantics\",\n");
+    raf_out("  \"parser_scope\":\"structural_scan_plus_json_grammar_no_utf8_semantic_schema\",\n");
     raf_out("  \"target_isa\":\""); raf_out(RAF_TARGET_ISA); raf_out("\",\n");
     raf_out("  \"buffer_bytes\":"); raf_out_u32(RAF_BUFFER_SIZE); raf_out(",\n");
     raf_out("  \"bytes\":"); raf_out_u64(p->s.bytes); raf_out(",\n");
@@ -363,11 +365,14 @@ static void raf_emit_receipt(const struct raf_parser *p) {
     raf_out("  \"structural_errors\":"); raf_out_u64(p->s.structural_errors); raf_out(",\n");
     raf_out("  \"read_error\":"); raf_out_bool(p->s.read_error); raf_out(",\n");
     raf_out("  \"structural_ok\":"); raf_out_bool(raf_structural_ok(p)); raf_out(",\n");
+    raf_out("  \"json_syntax_errors\":"); raf_out_u64((raf_u64)syntax->errors); raf_out(",\n");
+    raf_out("  \"json_syntax_ok\":"); raf_out_bool((raf_u32)raf_json_ok(syntax)); raf_out(",\n");
     raf_out("  \"claim_allowed\":false\n}\n");
 }
 
 __attribute__((noreturn)) void _start(void) {
     struct raf_parser *p = &g_parser;
+    struct raf_json_syntax *syntax = &g_syntax;
     p->s.fnv1a64 = 14695981039346656037ULL;
     p->expected_value_key = RAF_KEY_NONE;
     p->string_value_key = RAF_KEY_NONE;
@@ -384,14 +389,15 @@ __attribute__((noreturn)) void _start(void) {
             break;
         }
         for (i = 0U; i < (raf_u32)got; i++) {
+            raf_json_feed(syntax, g_buffer[i]);
             raf_feed_byte(p, g_buffer[i]);
         }
     }
 
-    raf_emit_receipt(p);
-    if (raf_structural_ok(p) != 0U) {
+    raf_json_finish(syntax);
+    raf_emit_receipt(p, syntax);
+    if ((raf_structural_ok(p) != 0U) && (raf_json_ok(syntax) != 0U)) {
         raf_exit(0L);
     }
     raf_exit(2L);
 }
-
