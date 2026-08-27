@@ -56,6 +56,7 @@ As sete imagens foram abertas com sucesso e seus hashes/dimensões coincidem com
 - APK baseline separado do fork atual.
 - ZIP íntegro e corpus real varrido por dois métodos.
 - Núcleo freestanding x86_64 implementado; 4/4 testes PASS; sem seção dinâmica.
+- Workflow CI freestanding materializado; resultado remoto permanece `TOKEN_VAZIO_RUNNER_PENDING` até execução observável.
 - RAW018 refinado sem preencher custódia inexistente.
 - Duplicidade do índice 000–050 caracterizada por ID, tamanho e revisão.
 
@@ -66,6 +67,7 @@ As sete imagens foram abertas com sucesso e seus hashes/dimensões coincidem com
 - APK atual RAFCODEΦ: build limpo, assinatura atual, instalação e runtime físico continuam abertos.
 - RAW018 atual: provider/bytes/SHA/parse continuam abertos.
 - Licença pública do novo núcleo: `TOKEN_VAZIO_OWNER_LICENSE_SELECTION`.
+- CI da PR: `TOKEN_VAZIO_RUNNER_PENDING` até o primeiro run produzir passos e logs.
 
 ## F_next
 
@@ -75,4 +77,3 @@ As sete imagens foram abertas com sucesso e seus hashes/dimensões coincidem com
 4. Não misturar esse baseline com o APK RAFCODEΦ atual nem com Vectras 3.6.6.
 
 > Parábola interna — O selo e a forja: o selo prova quem marcou o metal; não prova em qual forja a lâmina atual foi feita, nem se ela cortou no mundo real.
-
