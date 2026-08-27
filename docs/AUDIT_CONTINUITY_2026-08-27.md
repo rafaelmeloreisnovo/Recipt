@@ -77,3 +77,15 @@ As sete imagens foram abertas com sucesso e seus hashes/dimensões coincidem com
 4. Não misturar esse baseline com o APK RAFCODEΦ atual nem com Vectras 3.6.6.
 
 > Parábola interna — O selo e a forja: o selo prova quem marcou o metal; não prova em qual forja a lâmina atual foi feita, nem se ela cortou no mundo real.
+
+## Delta append-only — CI sucessor
+
+`TOKEN_VAZIO_RUNNER_PENDING` não foi apagado. Ele foi fechado pelo receipt sucessor `RUN-CI-RECIPT-33121515423`:
+
+- workflow run: `33121515423`;
+- head: `500e6140e9ffd4ab8c41849ddf412ba71402f4df`;
+- janela: `2026-08-27T22:12:01Z` → `2026-08-27T22:12:12Z`;
+- job `x86_64-linux`: `completed/success`;
+- build, 4 fixtures, fronteira ELF estática e JSON syntax: PASS em host GitHub independente.
+
+Estado promovido somente para `CROSS_HOST_BOUNDED_PASS`. O corpus real de 792.693.581 bytes não foi enviado ao runner, e ARM/Android/RAW018 continuam fora desta promoção.
