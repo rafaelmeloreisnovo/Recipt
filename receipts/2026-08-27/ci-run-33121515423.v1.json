@@ -1,0 +1,49 @@
+{
+  "schema": "rafaelia.ci-successor-receipt.v1",
+  "receipt_id": "RUN-CI-RECIPT-33121515423",
+  "repository": "rafaelmeloreisnovo/Recipt",
+  "pull_request": 1,
+  "workflow": "freestanding-receipt-gate",
+  "workflow_id": 344160728,
+  "run_id": 33121515423,
+  "run_number": 1,
+  "run_attempt": 1,
+  "event": "pull_request",
+  "head_branch": "feat/freestanding-stream-receipt-20260827",
+  "head_sha": "500e6140e9ffd4ab8c41849ddf412ba71402f4df",
+  "created_at": "2026-08-27T22:12:01Z",
+  "updated_at": "2026-08-27T22:12:12Z",
+  "previous_state": "TOKEN_VAZIO_RUNNER_PENDING",
+  "current_state": "CROSS_HOST_BOUNDED_PASS",
+  "status": "completed",
+  "conclusion": "success",
+  "job": {
+    "id": 98689259599,
+    "name": "x86_64-linux",
+    "status": "completed",
+    "conclusion": "success",
+    "steps": [
+      {"number": 2, "name": "Checkout pinned action", "conclusion": "success"},
+      {"number": 3, "name": "Build freestanding ELF", "conclusion": "success"},
+      {"number": 4, "name": "Run bounded fixtures", "conclusion": "success"},
+      {"number": 5, "name": "Enforce static syscall-only boundary", "conclusion": "success"},
+      {"number": 6, "name": "Validate committed JSON", "conclusion": "success"}
+    ]
+  },
+  "promotion_scope": [
+    "source_builds_on_independent_github_host",
+    "bounded_synthetic_fixtures_pass",
+    "static_no_NEEDED_boundary_pass",
+    "committed_JSON_is_syntactically_valid"
+  ],
+  "not_promoted": [
+    "real_792693581_byte_corpus_scan_on_github_runner",
+    "ARMv7_or_AArch64_build",
+    "physical_Android_execution",
+    "current_RAFCODEPHI_APK_build_or_runtime",
+    "RAW018_current_byte_custody",
+    "global_performance_claim"
+  ],
+  "claim_allowed": false
+}
+
