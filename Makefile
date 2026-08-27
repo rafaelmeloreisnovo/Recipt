@@ -39,6 +39,7 @@ verify-static: $(BIN)
 
 test: $(BIN)
 	sh tests/test_stream_json_receipt.sh $(BIN)
+	python3 tests/test_json_differential.py $(BIN)
 	printf '%s' '[]' | $(BIN) > $(BUILD_DIR)/contract-v2.json
 	python3 tests/validate_json_schema_subset.py $(V2_SCHEMA) $(BUILD_DIR)/contract-v2.json
 	python3 tests/validate_json_schema_subset.py $(V1_ENVELOPE_SCHEMA) $(V1_RECEIPT)
