@@ -1,0 +1,51 @@
+name: freestanding-receipt-gate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: freestanding-receipt-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  x86_64-linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout pinned action
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Build freestanding ELF
+        run: make all
+
+      - name: Run bounded fixtures
+        run: make test
+
+      - name: Enforce static syscall-only boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          file build/raf_stream_json_receipt
+          readelf -h build/raf_stream_json_receipt
+          if readelf -d build/raf_stream_json_receipt | grep -q '(NEEDED)'; then
+            echo 'FAIL: dynamic dependency detected' >&2
+            exit 1
+          fi
+          test "$(stat -c '%s' build/raf_stream_json_receipt)" -le 65536
+          sha256sum build/raf_stream_json_receipt \
+            src/raf_stream_json_receipt.c \
+            src/raf_syscall_linux.h \
+            tests/test_stream_json_receipt.sh
+
+      - name: Validate committed JSON
+        run: |
+          jq empty \
+            schemas/stream-json-receipt.schema.json \
+            data/manifests/attached-lot-2026-08-27.v1.json \
+            receipts/2026-08-27/stream-export-receipt.v1.json
+
