@@ -14,7 +14,7 @@ BIN ?= $(BUILD_DIR)/raf_stream_json_receipt
 SRC := src/raf_stream_json_receipt.c
 DEPS := src/raf_syscall_linux.h src/raf_json_syntax.h
 V2_SCHEMA := schemas/stream-json-receipt.schema.v2.json
-V1_SCHEMA := schemas/stream-json-receipt.schema.json
+V1_ENVELOPE_SCHEMA := schemas/stream-export-receipt-envelope.schema.v1.json
 V1_RECEIPT := receipts/2026-08-27/stream-export-receipt.v1.json
 
 .PHONY: all clean test inspect verify-static armv7 aarch64 cross
@@ -37,7 +37,7 @@ test: $(BIN)
 	sh tests/test_stream_json_receipt.sh $(BIN)
 	printf '%s' '[]' | $(BIN) > $(BUILD_DIR)/contract-v2.json
 	python3 tests/validate_json_schema_subset.py $(V2_SCHEMA) $(BUILD_DIR)/contract-v2.json
-	python3 tests/validate_json_schema_subset.py $(V1_SCHEMA) $(V1_RECEIPT)
+	python3 tests/validate_json_schema_subset.py $(V1_ENVELOPE_SCHEMA) $(V1_RECEIPT)
 
 inspect: verify-static
 	@true
