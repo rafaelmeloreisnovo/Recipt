@@ -1,0 +1,111 @@
+{
+  "schema": "rafcodephi.freestanding.stream-json-receipt.v1",
+  "receipt_id": "RUN-RECIPT-STREAM-20260827-001",
+  "observed_at_utc": "2026-08-27T22:07:04Z",
+  "evidence_class": "MEASURED_LOCAL",
+  "environment": {
+    "os": "Linux 6.18.35",
+    "isa": "x86_64",
+    "compiler": "gcc 13.3.0",
+    "build_contract": "freestanding; nostdlib; static; no dynamic section; fixed 65536-byte input buffer"
+  },
+  "source": {
+    "artifact_idx": "ART-EXPORT-20251006-001",
+    "archive_sha256": "53fbfbc52d110d5815024ca851868555d23c3180cd73bb5433dd5f5bade9d93f",
+    "member": "conversations.json",
+    "member_bytes": 792693581,
+    "member_sha256": "d2db8b130ed968b1b94768d98f6e1fcdba52233dc846b9b94a63749cee14b7cf",
+    "member_md5_legacy": "c19a1b12c35922f03ecc83c0e3d63bb6",
+    "member_blake2b512": "704ec444e37ac81f1735adad7f8cc9e404d098038df0765686ee4688d6ec23a8997dfb627916ea6830d2617fd6e77f2a378c11860a97e1a7d7b894c0c2846087",
+    "member_blake3": "TOKEN_VAZIO_TOOL_UNAVAILABLE"
+  },
+  "implementation": {
+    "binary_sha256": "a68ad233c6682ce29540c263611413a272de7cd1ae6cc6482b8afa32dee324d2",
+    "binary_bytes": 10360,
+    "source_sha256": "10b5e628442857f87e9f8dd7e42c12fcc9c5f93c443e3b2c4b5142c40e1f93e3",
+    "syscall_header_sha256": "d8d9ff0d44299ca34edae508d62dd526f0d64b9390bb975787a751ceb11dd270",
+    "parser_scope": "structural_scan_not_full_json_semantics"
+  },
+  "measurement": {
+    "wall_seconds": 4.19,
+    "fnv1a64_raw": "215c1492e0f4ca9e",
+    "root_array": true,
+    "top_level_objects": 2573,
+    "object_open": 2152355,
+    "object_close": 2152355,
+    "array_open": 1331215,
+    "array_close": 1331215,
+    "strings": 15709098,
+    "escapes": 26245277,
+    "max_depth": 13,
+    "field_counts": {
+      "id": 496690,
+      "title": 111787,
+      "create_time": 242079,
+      "update_time": 250715,
+      "mapping": 2573,
+      "current_node": 2573,
+      "conversation_id": 2799,
+      "message": 242079,
+      "author": 239506,
+      "role": 239506,
+      "content": 270134,
+      "parts": 204276
+    },
+    "role_value_counts": {
+      "user": 85264,
+      "assistant": 116174,
+      "system": 15701,
+      "tool": 22367,
+      "developer": 0
+    },
+    "structural_errors": 0,
+    "read_error": false,
+    "structural_ok": true
+  },
+  "independent_falsifier": {
+    "tool": "jq --stream",
+    "wall_seconds": 21.27,
+    "top_level_items": 2573,
+    "count_match": true,
+    "local_elapsed_ratio_jq_over_freestanding": 5.076,
+    "scope": "single_host_single_file_not_general_performance_claim"
+  },
+  "small_members": {
+    "user_json_keys_only": ["birth_year", "chatgpt_plus_user", "email", "id"],
+    "message_feedback_items": 2,
+    "shared_conversations_items": 72,
+    "privacy_note": "values from user.json were not emitted"
+  },
+  "relations": [
+    {
+      "from": "ART-EXPORT-20251006-001",
+      "to": "RAW018_PID_HASH_SET",
+      "type": "COUNT_MATCH_ONLY",
+      "observation": "attached export has 2573 top-level conversations; Drive Wave 3 reports Historical Locator unique PIDs=2573",
+      "identity_proven": false
+    },
+    {
+      "from": "ART-EXPORT-20251006-001",
+      "to": "conversations-018.json",
+      "type": "DOES_NOT_CONTAIN_MEMBER",
+      "current_RAW018_custody_closed": false
+    }
+  ],
+  "tests": {
+    "synthetic": "4/4 PASS",
+    "real_structural_scan": "PASS",
+    "independent_count": "PASS"
+  },
+  "token_vazio": [
+    "TV-BLAKE3-TOOL",
+    "TV-ARMV7-CROSS-BUILD",
+    "TV-AARCH64-CROSS-BUILD",
+    "TV-ARMV7-PHYSICAL-EXECUTION",
+    "TV-AARCH64-PHYSICAL-EXECUTION",
+    "TV-FULL-JSON-SEMANTIC-VALIDATION-IN-FREESTANDING-KERNEL",
+    "TV-RAW018-CURRENT-PROVIDER-BYTES-SHA256-JSON-PARSE"
+  ],
+  "claim_allowed": false
+}
+
