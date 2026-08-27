@@ -34,6 +34,7 @@ jobs:
           jq empty \
             schemas/stream-json-receipt.schema.json \
             schemas/stream-json-receipt.schema.v2.json \
+            schemas/stream-export-receipt-envelope.schema.v1.json \
             data/manifests/attached-lot-2026-08-27.v1.json \
             receipts/2026-08-27/stream-export-receipt.v1.json \
             receipts/2026-08-27/ci-run-33121515423.v1.json
@@ -62,7 +63,8 @@ jobs:
             src/raf_syscall_linux.h \
             tests/test_stream_json_receipt.sh \
             tests/validate_json_schema_subset.py \
-            schemas/stream-json-receipt.schema.v2.json
+            schemas/stream-json-receipt.schema.v2.json \
+            schemas/stream-export-receipt-envelope.schema.v1.json
 
   cross-linux:
     runs-on: ubuntu-24.04
