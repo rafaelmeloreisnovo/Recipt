@@ -12,6 +12,7 @@ LDFLAGS := -nostdlib -static -no-pie -Wl,-e,_start -Wl,--gc-sections \
 BUILD_DIR := build
 BIN ?= $(BUILD_DIR)/raf_stream_json_receipt
 SRC := src/raf_stream_json_receipt.c
+EXTRA_SRC ?=
 DEPS := src/raf_syscall_linux.h src/raf_json_syntax.h
 V2_SCHEMA := schemas/stream-json-receipt.schema.v2.json
 V1_ENVELOPE_SCHEMA := schemas/stream-export-receipt-envelope.schema.v1.json
@@ -21,15 +22,18 @@ V1_RECEIPT := receipts/2026-08-27/stream-export-receipt.v1.json
 
 all: $(BIN)
 
-$(BIN): $(SRC) $(DEPS)
+$(BIN): $(SRC) $(EXTRA_SRC) $(DEPS)
 	mkdir -p $(dir $(BIN))
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(SRC) $(LDFLAGS) -o $(BIN)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(SRC) $(EXTRA_SRC) $(LDFLAGS) -o $(BIN)
 
 verify-static: $(BIN)
 	file $(BIN)
 	readelf -h $(BIN)
 	@if readelf -d $(BIN) 2>/dev/null | grep -q '(NEEDED)'; then \
 		echo 'FAIL: dynamic dependency detected' >&2; exit 1; \
+	fi
+	@if nm -u $(BIN) | grep -q .; then \
+		echo 'FAIL: unresolved symbol detected' >&2; nm -u $(BIN) >&2; exit 1; \
 	fi
 	@test "$$(stat -c '%s' $(BIN))" -le 65536
 
@@ -43,7 +47,8 @@ inspect: verify-static
 	@true
 
 armv7:
-	$(MAKE) CC=$(ARMV7_CC) BIN=$(BUILD_DIR)/armv7/raf_stream_json_receipt all verify-static
+	$(MAKE) CC=$(ARMV7_CC) EXTRA_SRC=src/raf_aeabi_uldivmod.S \
+		BIN=$(BUILD_DIR)/armv7/raf_stream_json_receipt all verify-static
 
 aarch64:
 	$(MAKE) CC=$(AARCH64_CC) BIN=$(BUILD_DIR)/aarch64/raf_stream_json_receipt all verify-static
