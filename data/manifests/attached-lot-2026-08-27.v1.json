@@ -1,0 +1,110 @@
+{
+  "schema": "rafaelia.attached-lot-custody.v1",
+  "observed_at_utc": "2026-08-27T22:07:04Z",
+  "status": "VERIFIED_LIMITED_STATIC",
+  "claim_allowed": false,
+  "source_scope": "conversation scratch copies of user Library attachments",
+  "artifacts": [
+    {
+      "idx": "ART-APK-BASELINE-001",
+      "name": "com.termux_1002 (1).apk",
+      "workspace_name": "01-com.termux_1002-1-.apk",
+      "bytes": 113880067,
+      "sha256": "e6265a57eb5ca363808488e3b01955958bed93bc0c8a0d281849b363b11027ec",
+      "md5": "35c8e0ca2faa591076a5b01dfebf0128",
+      "classification": "BASELINE_REFERENCE_NOT_CURRENT_RAFCODEPHI_BUILD",
+      "prior_receipt_match": "termux-app-rafacodephi:data/evidence/upload_artifact_audit_20260814.v1.json@afa012d50d26640264f89befe96ceb98988356ae"
+    },
+    {
+      "idx": "ART-EXPORT-20251006-001",
+      "name": "d6e9db90fbd5ffb1158e68518e6f46005d1c78dbaef56427bb8a934c8f466c0a-2025-10-06-21-49-49-edd15254776a4346b05570a99e6d418f.zip",
+      "bytes": 305843744,
+      "sha256": "53fbfbc52d110d5815024ca851868555d23c3180cd73bb5433dd5f5bade9d93f",
+      "md5": "8cb5196b1dfe923fa8943952a1ad2d4d",
+      "entries": 5,
+      "uncompressed_bytes": 1607970090,
+      "crc_full_pass": true,
+      "classification": "HISTORICAL_CHATGPT_EXPORT_SOURCE_2025_10_06",
+      "prior_receipt_match": "termux-app-rafacodephi:data/evidence/upload_artifact_audit_20260814.v1.json@afa012d50d26640264f89befe96ceb98988356ae"
+    },
+    {
+      "idx": "LAT-IMG-000",
+      "name": "fractal_unificado_visual.png",
+      "bytes": 153751,
+      "width": 956,
+      "height": 900,
+      "sha256": "34b34fb6db90eb47ff206c013ea1264055af205296f380766749f7c835e14264",
+      "md5": "4b1915ab0ef9aa9b3f8a013b2e170e7f",
+      "visual_class": "COMPOSITE_FRACTAL_DIAGRAM_WITH_SYMBOLIC_TEXT",
+      "evidence_boundary": "pixel/text observation only; quantum, frequency and temporal labels are not measurements"
+    },
+    {
+      "idx": "LAT-IMG-001",
+      "name": "RAFAELIA_FRACTAL_Ω_0001_hybrid.png",
+      "bytes": 419887,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "09ce438287465ed76f3b4cc607dac5a5d915096b07a7c1cec5dac419b5d6e185",
+      "md5": "fdfcda361bc15c71eb2400525db53bd6",
+      "visual_class": "MANDELBROT_LIKE_FULL_FRAME_YELLOW_NAVY"
+    },
+    {
+      "idx": "LAT-IMG-005",
+      "name": "RAFAELIA_FRACTAL_Ω_0005_tag14.png",
+      "bytes": 367886,
+      "width": 950,
+      "height": 950,
+      "sha256": "c6c34c72ecd7cb78e2b3217d1320e98a46f34e039b4b59e067db2dbecb1f5f3a",
+      "md5": "3bc715fd25a4ac0ad305f215afd300f3",
+      "visual_class": "MANDELBROT_LIKE_CROPPED_WHITE_BLACK"
+    },
+    {
+      "idx": "LAT-IMG-006",
+      "name": "RAFAELIA_FRACTAL_Ω_0006_cheio.png",
+      "bytes": 530975,
+      "width": 1024,
+      "height": 1024,
+      "sha256": "b4bbb92f475870d3a673bc45ffa97acc1eb02842e18610a55f2fdb3d9465c033",
+      "md5": "c34c275e7d8410339edb57a72af2b0c5",
+      "visual_class": "MANDELBROT_LIKE_CROPPED_YELLOW_PURPLE"
+    },
+    {
+      "idx": "LAT-IMG-003",
+      "name": "RAFAELIA_FRACTAL_Ω_0003_fibonacci.png",
+      "bytes": 352241,
+      "width": 840,
+      "height": 840,
+      "sha256": "ab9af9253e1985a02b7731e775c6ea83891c79470a336efca8976eb88939beee",
+      "md5": "a41cf606bf87a29dd83916ef62094f96",
+      "visual_class": "MANDELBROT_LIKE_FULL_FRAME_WHITE_DARK"
+    },
+    {
+      "idx": "LAT-IMG-004",
+      "name": "RAFAELIA_FRACTAL_Ω_0004_delta.png",
+      "bytes": 535486,
+      "width": 1100,
+      "height": 1100,
+      "sha256": "b3cabd090f54da28dab569951238d99013eeb1ca5a6d328726c24333a32ceb5d",
+      "md5": "d1c9d4040fd0c6a6d9c6ac6260f118e7",
+      "visual_class": "MANDELBROT_LIKE_CROPPED_PALE_YELLOW_NAVY"
+    },
+    {
+      "idx": "LAT-IMG-002",
+      "name": "RAFAELIA_FRACTAL_Ω_0002_voynich.png",
+      "bytes": 381853,
+      "width": 900,
+      "height": 900,
+      "sha256": "15e9752115e79967066e6409a0b8e0f51265feac963f8970829ac54b8c6778a8",
+      "md5": "3ed6fb0b8fd22efee584eec733348d4e",
+      "visual_class": "MANDELBROT_LIKE_FULL_FRAME_YELLOW_PURPLE"
+    }
+  ],
+  "invariants": [
+    "same_hash_means_same_bytes_not_same_semantic_claim",
+    "historical_export_is_not_current_NOVOexport_shard_custody",
+    "baseline_APK_is_not_current_RAFCODEPHI_build",
+    "visual_similarity_is_not_generator_parameter_identity",
+    "MD5_is_legacy_correlation_only_not_security_authority"
+  ]
+}
+
