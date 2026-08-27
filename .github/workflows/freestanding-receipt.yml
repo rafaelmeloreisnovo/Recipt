@@ -15,7 +15,7 @@ concurrency:
 jobs:
   x86_64-linux:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Checkout pinned action
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
@@ -23,29 +23,85 @@ jobs:
       - name: Build freestanding ELF
         run: make all
 
-      - name: Run bounded fixtures
+      - name: Run grammar and contract fixtures
         run: make test
 
       - name: Enforce static syscall-only boundary
-        shell: bash
-        run: |
-          set -euo pipefail
-          file build/raf_stream_json_receipt
-          readelf -h build/raf_stream_json_receipt
-          if readelf -d build/raf_stream_json_receipt | grep -q '(NEEDED)'; then
-            echo 'FAIL: dynamic dependency detected' >&2
-            exit 1
-          fi
-          test "$(stat -c '%s' build/raf_stream_json_receipt)" -le 65536
-          sha256sum build/raf_stream_json_receipt \
-            src/raf_stream_json_receipt.c \
-            src/raf_syscall_linux.h \
-            tests/test_stream_json_receipt.sh
+        run: make verify-static
 
-      - name: Validate committed JSON
+      - name: Validate committed JSON syntax
         run: |
           jq empty \
             schemas/stream-json-receipt.schema.json \
+            schemas/stream-json-receipt.schema.v2.json \
+            schemas/stream-export-receipt-envelope.schema.v1.json \
             data/manifests/attached-lot-2026-08-27.v1.json \
-            receipts/2026-08-27/stream-export-receipt.v1.json
+            receipts/2026-08-27/stream-export-receipt.v1.json \
+            receipts/2026-08-27/ci-run-33121515423.v1.json
 
+      - name: Prove claim gate fails closed
+        run: |
+          printf '%s' '[]' | build/raf_stream_json_receipt > build/claim-negative.json
+          python3 - <<'PY'
+          import json
+          p='build/claim-negative.json'
+          d=json.load(open(p, encoding='utf-8'))
+          d['claim_allowed']=True
+          json.dump(d, open(p, 'w', encoding='utf-8'))
+          PY
+          if python3 tests/validate_json_schema_subset.py schemas/stream-json-receipt.schema.v2.json build/claim-negative.json; then
+            echo 'FAIL: claim_allowed=true escaped schema gate' >&2
+            exit 1
+          fi
+
+      - name: Hash bounded implementation set
+        run: |
+          sha256sum \
+            build/raf_stream_json_receipt \
+            src/raf_stream_json_receipt.c \
+            src/raf_json_syntax.h \
+            src/raf_syscall_linux.h \
+            tests/test_stream_json_receipt.sh \
+            tests/validate_json_schema_subset.py \
+            schemas/stream-json-receipt.schema.v2.json \
+            schemas/stream-export-receipt-envelope.schema.v1.json
+
+  cross-linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target: armv7
+            package: gcc-arm-linux-gnueabihf
+            machine: ARM
+          - target: aarch64
+            package: gcc-aarch64-linux-gnu
+            machine: AArch64
+    steps:
+      - name: Checkout pinned action
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Install bounded cross compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y "${{ matrix.package }}"
+
+      - name: Cross-build freestanding ELF
+        run: make "${{ matrix.target }}"
+
+      - name: Verify architecture and no dynamic dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          bin="build/${{ matrix.target }}/raf_stream_json_receipt"
+          file "$bin"
+          readelf -h "$bin" | tee build/${{ matrix.target }}/elf-header.txt
+          grep -F 'Machine:' build/${{ matrix.target }}/elf-header.txt | grep -F '${{ matrix.machine }}'
+          if readelf -d "$bin" 2>/dev/null | grep -q '(NEEDED)'; then
+            echo 'FAIL: dynamic dependency detected' >&2
+            exit 1
+          fi
+          test "$(stat -c '%s' "$bin")" -le 65536
+          sha256sum "$bin" src/raf_stream_json_receipt.c src/raf_json_syntax.h src/raf_syscall_linux.h

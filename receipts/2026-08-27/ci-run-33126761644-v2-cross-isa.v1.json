@@ -1,0 +1,73 @@
+{
+  "schema": "rafaelia.cross-isa-ci-receipt.v1",
+  "receipt_id": "RUN-CI-RECIPT-33126761644-V2",
+  "repository": "rafaelmeloreisnovo/Recipt",
+  "pull_request": 2,
+  "workflow": "freestanding-receipt-gate",
+  "workflow_id": 344160728,
+  "run_id": 33126761644,
+  "run_number": 9,
+  "event": "pull_request",
+  "head_branch": "evolve/receipt-v2-hardening-20260827",
+  "head_sha": "41c938f6faa2bbd0b25c453441c8f1aa7f5491dd",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": {
+    "x86_64_linux": {
+      "job_id": 98706677189,
+      "conclusion": "success",
+      "build": "PASS",
+      "grammar_and_contract_fixtures": "PASS_18_OF_18_PLUS_SCHEMA",
+      "static_boundary": "PASS_NO_NEEDED_NO_UNRESOLVED",
+      "claim_fail_closed": "PASS",
+      "implementation_hashes": "PASS"
+    },
+    "aarch64_cross_linux": {
+      "job_id": 98706677248,
+      "conclusion": "success",
+      "cross_build": "PASS",
+      "machine_check": "AARCH64_PASS",
+      "static_boundary": "PASS_NO_NEEDED_NO_UNRESOLVED"
+    },
+    "armv7_cross_linux": {
+      "job_id": 98706676976,
+      "conclusion": "success",
+      "cross_build": "PASS",
+      "machine_check": "ARM_PASS",
+      "static_boundary": "PASS_NO_NEEDED_NO_UNRESOLVED",
+      "compiler_runtime_gap_resolution": "__aeabi_uldivmod implemented in-tree; no libgcc link introduced"
+    }
+  },
+  "promotions": {
+    "TV-V2-X86-CI": {
+      "previous_state": "TOKEN_VAZIO_RUNNER_PENDING",
+      "current_state": "CROSS_HOST_BOUNDED_PASS"
+    },
+    "TV-AARCH64-CROSS-BUILD": {
+      "previous_state": "TOKEN_VAZIO_RUNNER_PENDING",
+      "current_state": "CROSS_BUILD_VERIFIED"
+    },
+    "TV-ARMV7-CROSS-BUILD": {
+      "previous_state": "TOKEN_VAZIO_RUNNER_PENDING",
+      "current_state": "CROSS_BUILD_VERIFIED"
+    }
+  },
+  "not_promoted": [
+    "TV-ARMV7-PHYSICAL-EXECUTION",
+    "TV-AARCH64-PHYSICAL-EXECUTION",
+    "TV-UTF8-VALIDATION",
+    "TV-FULL-DOMAIN-SCHEMA-SEMANTICS",
+    "TV-RAW018-CURRENT-PROVIDER-BYTES-SHA256-JSON-PARSE",
+    "TV-BLAKE3-TOOL_WHERE_UNAVAILABLE",
+    "TOKEN_VAZIO_OWNER_LICENSE_SELECTION",
+    "GLOBAL_PERFORMANCE_CLAIM"
+  ],
+  "invariants": [
+    "cross_build_is_not_physical_execution",
+    "static_link_is_not_domain_validation",
+    "successful_ci_is_bounded_to_observed_gates",
+    "historical_receipts_are_not_rewritten",
+    "claim_scope_must_not_exceed_evidence_scope"
+  ],
+  "claim_allowed": false
+}

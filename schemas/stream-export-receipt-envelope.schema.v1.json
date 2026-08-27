@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:rafcodephi:recipt:stream-export-evidence-envelope:v1",
+  "title": "RAFCODE-Φ Stream Export Evidence Envelope V1",
+  "type": "object",
+  "required": [
+    "schema",
+    "receipt_id",
+    "observed_at_utc",
+    "evidence_class",
+    "environment",
+    "source",
+    "implementation",
+    "measurement",
+    "independent_falsifier",
+    "small_members",
+    "relations",
+    "tests",
+    "token_vazio",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema": {"const": "rafcodephi.freestanding.stream-json-receipt.v1"},
+    "receipt_id": {"type": "string", "minLength": 1},
+    "observed_at_utc": {"type": "string", "minLength": 1},
+    "evidence_class": {"const": "MEASURED_LOCAL"},
+    "environment": {
+      "type": "object",
+      "required": ["os", "isa", "compiler", "build_contract"],
+      "properties": {
+        "os": {"type": "string", "minLength": 1},
+        "isa": {"const": "x86_64"},
+        "compiler": {"type": "string", "minLength": 1},
+        "build_contract": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "source": {
+      "type": "object",
+      "required": ["artifact_idx", "archive_sha256", "member", "member_bytes", "member_sha256", "member_md5_legacy", "member_blake2b512", "member_blake3"],
+      "properties": {
+        "artifact_idx": {"type": "string", "minLength": 1},
+        "archive_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "member": {"const": "conversations.json"},
+        "member_bytes": {"type": "integer", "minimum": 1},
+        "member_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "member_md5_legacy": {"type": "string", "pattern": "^[0-9a-f]{32}$"},
+        "member_blake2b512": {"type": "string", "pattern": "^[0-9a-f]{128}$"},
+        "member_blake3": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    },
+    "implementation": {
+      "type": "object",
+      "required": ["binary_sha256", "binary_bytes", "source_sha256", "syscall_header_sha256", "parser_scope"],
+      "properties": {
+        "binary_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "binary_bytes": {"type": "integer", "minimum": 1, "maximum": 65536},
+        "source_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "syscall_header_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "parser_scope": {"const": "structural_scan_not_full_json_semantics"}
+      },
+      "additionalProperties": false
+    },
+    "measurement": {
+      "type": "object",
+      "required": ["wall_seconds", "fnv1a64_raw", "root_array", "top_level_objects", "object_open", "object_close", "array_open", "array_close", "strings", "escapes", "max_depth", "field_counts", "role_value_counts", "structural_errors", "read_error", "structural_ok"],
+      "properties": {
+        "wall_seconds": {},
+        "fnv1a64_raw": {"type": "string", "pattern": "^[0-9a-f]{16}$"},
+        "root_array": {"const": true},
+        "top_level_objects": {"type": "integer", "minimum": 0},
+        "object_open": {"type": "integer", "minimum": 0},
+        "object_close": {"type": "integer", "minimum": 0},
+        "array_open": {"type": "integer", "minimum": 0},
+        "array_close": {"type": "integer", "minimum": 0},
+        "strings": {"type": "integer", "minimum": 0},
+        "escapes": {"type": "integer", "minimum": 0},
+        "max_depth": {"type": "integer", "minimum": 1, "maximum": 512},
+        "field_counts": {"type": "object"},
+        "role_value_counts": {"type": "object"},
+        "structural_errors": {"const": 0},
+        "read_error": {"const": false},
+        "structural_ok": {"const": true}
+      },
+      "additionalProperties": false
+    },
+    "independent_falsifier": {"type": "object"},
+    "small_members": {"type": "object"},
+    "relations": {"type": "array"},
+    "tests": {"type": "object"},
+    "token_vazio": {"type": "array"},
+    "claim_allowed": {"const": false}
+  },
+  "additionalProperties": false
+}
