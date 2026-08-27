@@ -18,6 +18,14 @@ SEED = 0x52414632
 VALID_RANDOM_CASES = 256
 
 
+def reject_non_json_constant(value: str):
+    raise ValueError(f"non-JSON numeric constant: {value}")
+
+
+def strict_loads(text: str):
+    return json.loads(text, parse_constant=reject_non_json_constant)
+
+
 def random_scalar(rng: random.Random):
     pick = rng.randrange(6)
     if pick == 0:
@@ -52,7 +60,7 @@ def run_kernel(binary: str, payload: bytes):
         [binary], input=payload, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False
     )
     try:
-        receipt = json.loads(proc.stdout.decode("utf-8"))
+        receipt = strict_loads(proc.stdout.decode("utf-8"))
     except Exception as exc:  # pragma: no cover - fail path diagnostic
         raise AssertionError(
             f"kernel emitted non-JSON receipt rc={proc.returncode}: {proc.stdout!r} {proc.stderr!r}"
@@ -61,7 +69,7 @@ def run_kernel(binary: str, payload: bytes):
 
 
 def expect_valid(binary: str, text: str) -> None:
-    parsed = json.loads(text)
+    parsed = strict_loads(text)
     if not isinstance(parsed, list):
         raise AssertionError("test oracle payload must use a root array")
     rc, receipt = run_kernel(binary, text.encode("utf-8"))
@@ -74,8 +82,8 @@ def expect_valid(binary: str, text: str) -> None:
 
 def expect_invalid(binary: str, text: str) -> None:
     try:
-        json.loads(text)
-    except (json.JSONDecodeError, UnicodeDecodeError):
+        strict_loads(text)
+    except (json.JSONDecodeError, UnicodeDecodeError, ValueError):
         pass
     else:
         raise AssertionError(f"invalid oracle case unexpectedly accepted by Python: {text!r}")
@@ -134,7 +142,7 @@ def main() -> int:
 
     # Root-object is valid generic JSON but invalid by the kernel contract; test separately.
     root_object = invalid.pop(18)
-    assert isinstance(json.loads(root_object), dict)
+    assert isinstance(strict_loads(root_object), dict)
     rc, receipt = run_kernel(binary, root_object.encode("utf-8"))
     assert rc == 2 and receipt["structural_ok"] is False and receipt["claim_allowed"] is False
 
