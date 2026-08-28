@@ -43,15 +43,32 @@ A saída V2 separa:
 
 O escopo permanece deliberadamente menor que um parser de domínio: V2 não afirma validação UTF-8 completa, schema semântico do corpus, identidade de conversas, hash criptográfico pelo FNV-1a ou benchmark universal.
 
+## Public repository provenance envelope V1
+
+O Recipt também possui um envelope fail-closed para observações de repositórios públicos:
+
+- schema: `schemas/public-repo-provenance-envelope.schema.v1.json`;
+- fixture canônica: `receipts/2026-08-28/public-repo-provenance-envelope.recipt.v1.json`;
+- gate: `make provenance-gate`, incluído em `make test`.
+
+O envelope separa obrigatoriamente:
+
+`repo+commit -> autoridade -> licença -> proveniência -> terceiros -> gates -> TOKEN_VAZIO -> risco/mitigação -> rollback -> claim_allowed=false`
+
+Publicar código não é interpretado como concessão de licença. Uma licença upstream não é interpretada como propriedade autoral do fork. Um hash não é interpretado como prova jurídica, científica ou de segurança. Um build não é interpretado como execução física.
+
+O receipt de 2026-08-28 preserva explicitamente `TOKEN_VAZIO_OWNER_LICENSE_SELECTION`: a escolha da licença pública do Recipt permanece ato do titular e só fecha por sucessor append-only. O novo schema organiza e testa o gap; não o apaga.
+
 ## Build e testes
 
 ```sh
 make
 make test
 make verify-static
+make provenance-gate
 ```
 
-`make test` executa fixtures positivas e negativas, gera uma saída V2 e a valida contra `schemas/stream-json-receipt.schema.v2.json` com um validador Python stdlib sem dependências externas.
+`make test` executa fixtures positivas e negativas, gera uma saída V2, valida os schemas existentes e também valida o envelope público de proveniência com invariantes fail-closed.
 
 Execução no membro de um ZIP:
 
