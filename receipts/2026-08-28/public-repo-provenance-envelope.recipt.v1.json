@@ -1,0 +1,85 @@
+{
+  "schema": "rafaelia.public-repo-provenance-envelope.v1",
+  "observed_at": "2026-08-28T17:26:00-03:00",
+  "repository": {
+    "name": "rafaelmeloreisnovo/Recipt",
+    "commit": "6f8c6c56045fe1234bd3924556b60cfdfa183552",
+    "visibility": "public",
+    "default_branch": "main"
+  },
+  "authority": {
+    "local_role": "evidence_receipt_kernel",
+    "federated_router": "rafaelmeloreisnovo/Mapa",
+    "promotion_authority": "repository_owner_plus_named_evidence_gate"
+  },
+  "license": {
+    "state": "TOKEN_VAZIO_OWNER_LICENSE_SELECTION",
+    "root_anchor": "LICENSE_SCOPE.md@5a2363b868474c1f4f9170865995359be61bb2e2",
+    "upstream_preserved": true,
+    "authorial_delta_license_state": "TOKEN_VAZIO_OWNER_LICENSE_SELECTION"
+  },
+  "provenance": {
+    "origin_classification": "AUTHORIAL_PROJECT_LICENSE_SELECTION_OPEN",
+    "delta_boundary_state": "AUTHORIAL_IMPLEMENTATION_CLAIM_RECORDED",
+    "third_party_state": "NO_THIRD_PARTY_CODE_OBSERVED_BY_EXISTING_LICENSE_SCOPE_RECORD",
+    "anchors": [
+      "README.md@8fa8f39b8a1e2b096cce3722482a00d4806d883b",
+      "LICENSE_SCOPE.md@5a2363b868474c1f4f9170865995359be61bb2e2"
+    ]
+  },
+  "gates": [
+    {
+      "id": "RECEIPT_SCHEMA_V2",
+      "state": "IMPLEMENTED",
+      "falsifier": "invalid V2 receipt accepted by schema subset validator",
+      "evidence": "Makefile:test"
+    },
+    {
+      "id": "PUBLIC_LICENSE_SELECTION",
+      "state": "TOKEN_VAZIO",
+      "falsifier": "owner-selected public grant exists and is published with exact scope",
+      "evidence": null
+    }
+  ],
+  "gaps": [
+    {
+      "id": "TV-LICENSE-OWNER-SELECTION",
+      "state": "TOKEN_VAZIO",
+      "urgency": "P0",
+      "owner": "repository_owner",
+      "closure": "publish explicit public license or explicit rights-reserved successor without rewriting historical state",
+      "next_verifiable_step": "owner decision followed by append-only successor receipt"
+    },
+    {
+      "id": "TV-ARMV7-PHYSICAL",
+      "state": "TOKEN_VAZIO",
+      "urgency": "P1",
+      "owner": "runtime_evidence_producer",
+      "closure": "execute exact commit on ARMv7 physical environment and preserve receipt",
+      "next_verifiable_step": "run armv7 binary on physical Termux/Linux target"
+    },
+    {
+      "id": "TV-AARCH64-PHYSICAL",
+      "state": "TOKEN_VAZIO",
+      "urgency": "P1",
+      "owner": "runtime_evidence_producer",
+      "closure": "execute exact commit on AArch64 physical environment and preserve receipt",
+      "next_verifiable_step": "run aarch64 binary on physical Termux/Linux target"
+    }
+  ],
+  "risk": {
+    "severity": "HIGH",
+    "summary": "public source exists while public permission remains intentionally undefined and runtime evidence is architecture-limited",
+    "mitigations": [
+      "claim_allowed remains false",
+      "do not infer a license from public visibility",
+      "preserve historical license-selection TOKEN_VAZIO",
+      "separate build evidence from physical execution"
+    ]
+  },
+  "rollback": {
+    "available": true,
+    "procedure": "revert provenance-envelope commits; historical V1/V2 receipts remain untouched"
+  },
+  "claim_allowed": false
+}
