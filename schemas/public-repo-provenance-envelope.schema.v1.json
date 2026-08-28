@@ -47,7 +47,7 @@
       "required": ["state", "root_anchor", "upstream_preserved", "authorial_delta_license_state"],
       "properties": {
         "state": {"type": "string", "minLength": 1},
-        "root_anchor": {"type": ["string", "null"]},
+        "root_anchor": {"type": "string", "minLength": 1},
         "upstream_preserved": {"type": "boolean"},
         "authorial_delta_license_state": {"type": "string", "minLength": 1}
       }
@@ -74,7 +74,7 @@
           "id": {"type": "string", "minLength": 1},
           "state": {"enum": ["PASS", "FAIL", "TOKEN_VAZIO", "BLOCKED", "IMPLEMENTED"]},
           "falsifier": {"type": "string", "minLength": 1},
-          "evidence": {"type": ["string", "null"]}
+          "evidence": {"type": "string", "minLength": 1}
         }
       }
     },
