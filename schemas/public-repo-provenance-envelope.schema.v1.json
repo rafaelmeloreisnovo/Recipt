@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://rafaelia.local/schemas/public-repo-provenance-envelope.schema.v1.json",
+  "title": "RAFAELIA Public Repository Provenance Envelope V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "observed_at",
+    "repository",
+    "authority",
+    "license",
+    "provenance",
+    "gates",
+    "gaps",
+    "risk",
+    "rollback",
+    "claim_allowed"
+  ],
+  "properties": {
+    "schema": {"const": "rafaelia.public-repo-provenance-envelope.v1"},
+    "observed_at": {"type": "string", "minLength": 1},
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "commit", "visibility"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "visibility": {"const": "public"},
+        "default_branch": {"type": "string"}
+      }
+    },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["local_role", "federated_router", "promotion_authority"],
+      "properties": {
+        "local_role": {"type": "string", "minLength": 1},
+        "federated_router": {"const": "rafaelmeloreisnovo/Mapa"},
+        "promotion_authority": {"type": "string", "minLength": 1}
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "root_anchor", "upstream_preserved", "authorial_delta_license_state"],
+      "properties": {
+        "state": {"type": "string", "minLength": 1},
+        "root_anchor": {"type": ["string", "null"]},
+        "upstream_preserved": {"type": "boolean"},
+        "authorial_delta_license_state": {"type": "string", "minLength": 1}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["origin_classification", "delta_boundary_state", "third_party_state"],
+      "properties": {
+        "origin_classification": {"type": "string", "minLength": 1},
+        "delta_boundary_state": {"type": "string", "minLength": 1},
+        "third_party_state": {"type": "string", "minLength": 1},
+        "anchors": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "state", "falsifier", "evidence"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "state": {"enum": ["PASS", "FAIL", "TOKEN_VAZIO", "BLOCKED", "IMPLEMENTED"]},
+          "falsifier": {"type": "string", "minLength": 1},
+          "evidence": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "state", "urgency", "owner", "closure", "next_verifiable_step"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "state": {"const": "TOKEN_VAZIO"},
+          "urgency": {"enum": ["P0", "P1", "P2", "P3"]},
+          "owner": {"type": "string", "minLength": 1},
+          "closure": {"type": "string", "minLength": 1},
+          "next_verifiable_step": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "risk": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["severity", "summary", "mitigations"],
+      "properties": {
+        "severity": {"enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]},
+        "summary": {"type": "string", "minLength": 1},
+        "mitigations": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["available", "procedure"],
+      "properties": {
+        "available": {"type": "boolean"},
+        "procedure": {"type": "string", "minLength": 1}
+      }
+    },
+    "claim_allowed": {"const": false}
+  }
+}
