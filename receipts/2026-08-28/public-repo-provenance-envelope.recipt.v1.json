@@ -38,7 +38,7 @@
       "id": "PUBLIC_LICENSE_SELECTION",
       "state": "TOKEN_VAZIO",
       "falsifier": "owner-selected public grant exists and is published with exact scope",
-      "evidence": null
+      "evidence": "TOKEN_VAZIO_OWNER_LICENSE_SELECTION"
     }
   ],
   "gaps": [
