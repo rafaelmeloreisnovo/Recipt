@@ -17,8 +17,10 @@ DEPS := src/raf_syscall_linux.h src/raf_json_syntax.h
 V2_SCHEMA := schemas/stream-json-receipt.schema.v2.json
 V1_ENVELOPE_SCHEMA := schemas/stream-export-receipt-envelope.schema.v1.json
 V1_RECEIPT := receipts/2026-08-27/stream-export-receipt.v1.json
+PUBLIC_PROVENANCE_SCHEMA := schemas/public-repo-provenance-envelope.schema.v1.json
+PUBLIC_PROVENANCE_RECEIPT := receipts/2026-08-28/public-repo-provenance-envelope.recipt.v1.json
 
-.PHONY: all clean test inspect verify-static armv7 aarch64 cross
+.PHONY: all clean test inspect verify-static armv7 aarch64 cross provenance-gate
 
 all: $(BIN)
 
@@ -37,7 +39,20 @@ verify-static: $(BIN)
 	fi
 	@test "$$(stat -c '%s' $(BIN))" -le 65536
 
-test: $(BIN)
+provenance-gate:
+	python3 tests/validate_json_schema_subset.py $(PUBLIC_PROVENANCE_SCHEMA) $(PUBLIC_PROVENANCE_RECEIPT)
+	python3 - <<'PY'
+	import json
+	from pathlib import Path
+	p = Path('$(PUBLIC_PROVENANCE_RECEIPT)')
+	d = json.loads(p.read_text(encoding='utf-8'))
+	assert d['claim_allowed'] is False
+	assert any(g['state'] == 'TOKEN_VAZIO' for g in d['gaps'])
+	assert d['license']['state'] == 'TOKEN_VAZIO_OWNER_LICENSE_SELECTION'
+	print('public provenance fail-closed gate: PASS')
+	PY
+
+test: $(BIN) provenance-gate
 	sh tests/test_stream_json_receipt.sh $(BIN)
 	python3 tests/test_json_differential.py $(BIN)
 	printf '%s' '[]' | $(BIN) > $(BUILD_DIR)/contract-v2.json
