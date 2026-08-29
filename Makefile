@@ -19,6 +19,7 @@ V1_ENVELOPE_SCHEMA := schemas/stream-export-receipt-envelope.schema.v1.json
 V1_RECEIPT := receipts/2026-08-27/stream-export-receipt.v1.json
 PUBLIC_PROVENANCE_SCHEMA := schemas/public-repo-provenance-envelope.schema.v1.json
 PUBLIC_PROVENANCE_RECEIPT := receipts/2026-08-28/public-repo-provenance-envelope.recipt.v1.json
+PUBLIC_PROVENANCE_GATE := tests/check_public_provenance_gate.py
 
 .PHONY: all clean test inspect verify-static armv7 aarch64 cross provenance-gate
 
@@ -41,16 +42,7 @@ verify-static: $(BIN)
 
 provenance-gate:
 	python3 tests/validate_json_schema_subset.py $(PUBLIC_PROVENANCE_SCHEMA) $(PUBLIC_PROVENANCE_RECEIPT)
-	python3 - <<'PY'
-	import json
-	from pathlib import Path
-	p = Path('$(PUBLIC_PROVENANCE_RECEIPT)')
-	d = json.loads(p.read_text(encoding='utf-8'))
-	assert d['claim_allowed'] is False
-	assert any(g['state'] == 'TOKEN_VAZIO' for g in d['gaps'])
-	assert d['license']['state'] == 'TOKEN_VAZIO_OWNER_LICENSE_SELECTION'
-	print('public provenance fail-closed gate: PASS')
-	PY
+	python3 $(PUBLIC_PROVENANCE_GATE)
 
 test: $(BIN) provenance-gate
 	sh tests/test_stream_json_receipt.sh $(BIN)
