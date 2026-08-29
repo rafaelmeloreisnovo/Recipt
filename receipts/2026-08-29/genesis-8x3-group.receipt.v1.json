@@ -1,0 +1,73 @@
+{
+  "schema": "rafaelia.genesis-8x3-group-receipt/v1",
+  "observed_at": "2026-08-29T05:35:00Z",
+  "group_id": "RAFAELIA-GENESIS-8X3-OMEGA-20260829T053500Z",
+  "state": "MATERIALIZED_WITH_OPEN_GATES",
+  "claim_allowed": false,
+  "operator": "★ Coerência × Amor^∞ × Prova",
+  "question_root": "O que carrega o conhecimento que entendeu?",
+  "git_commits": {
+    "RafPolimata_schema": "bb281ba31495fd2abd4904e07441b8cfaf5434cc",
+    "RafPolimata_materializer": "7048f46638c3de272e54c54fcc193f2d2c2e02dc",
+    "RafPolimata_tests": "b9546bbcd8843bedcbe836a658d884e109c09d1b",
+    "RafPolimata_workflow": "b2c21cc9dced5693c3c3482e159af951e350933a",
+    "papers_concept_doc": "1ef08db5accfd503c637309ee35266b2c9127533",
+    "Mapa_route": "3cf55a66a5b8893fdb53bc16607672b1130f1d4b"
+  },
+  "local_artifacts_declared": {
+    "docx": "RAFAELIA_GENESIS_8x3_Dossier.docx",
+    "pdf": "RAFAELIA_GENESIS_8x3_Dossier.pdf",
+    "xlsx": "RAFAELIA_GENESIS_8x3_Matrix.xlsx",
+    "pptx": "RAFAELIA_GENESIS_8x3_VisualDeck.pptx",
+    "manifest": "genesis_8x3_group_manifest.json"
+  },
+  "counts": {
+    "genesis_8x3_cells": 24,
+    "dimensions": 8,
+    "stages": 3,
+    "parables": 8,
+    "formulas": 50,
+    "A_states": 40,
+    "B_states": 21,
+    "A_B_cross": 840,
+    "pairs_of_pairs": 163800
+  },
+  "open_gates": {
+    "matrix_C_identity": "TOKEN_VAZIO_MATRIX_C_IDENTITY",
+    "matrix_C_formula": "TOKEN_VAZIO_MATRIX_C_FORMULA",
+    "full_dialect_IPA": "TOKEN_VAZIO",
+    "physical_audio_protocol": "TOKEN_VAZIO",
+    "quantum_physical_claim": "BLOCKED_METAPHOR_ONLY",
+    "gmail_send": "WITHHELD_NO_RECIPIENT",
+    "calendar_create": "WITHHELD_NO_TIME",
+    "openai_developers_execution": "TEMPLATE_ONLY"
+  },
+  "invariants": [
+    "TOKEN_VAZIO != false claim",
+    "metaphor != measurement",
+    "artifact != runtime proof",
+    "Gmail/Calendar require explicit target/time confirmation",
+    "chronology is evidence and is not permuted"
+  ],
+  "F_ok": [
+    "group_id_declared",
+    "8x3_reconstructed",
+    "A_B_counts_preserved",
+    "schema_materializer_tests_workflow_written",
+    "concept_document_written",
+    "route_written"
+  ],
+  "F_gap": [
+    "TOKEN_VAZIO_MATRIX_C_IDENTITY",
+    "TOKEN_VAZIO_FULL_IPA_DIALECT_MATRIX",
+    "TOKEN_VAZIO_CI_RUN_OBSERVATION",
+    "WITHHELD_GMAIL_CALENDAR_SIDE_EFFECTS"
+  ],
+  "F_next": [
+    "observe_ci_run",
+    "fetch_artifact",
+    "issue_successor_receipt",
+    "bind_matrix_C_formula",
+    "derive_explicit_metrics_for_S4_scheduler"
+  ]
+}
