@@ -1,0 +1,63 @@
+{
+  "schema": "rafaelia.conversation-shard-pair-binding-receipt/v1",
+  "observed_at": "2026-08-29",
+  "source": {
+    "provider": "google_drive",
+    "file_id": "1VfP3u2BUBJ7aByrHh-PUfo4cW1jj3SBZ",
+    "file_name": "conversations-000.json",
+    "bytes": 28152659,
+    "sha256": "27b3ebe900dcf811e648f0bcb8da02cc5e1e1230049567cdd1a83a6df317ee06"
+  },
+  "observation": {
+    "root_type": "list",
+    "conversation_count": 100,
+    "message_count_with_message_object": 9850,
+    "role_counts": {
+      "assistant": 5089,
+      "user": 4761
+    },
+    "user_to_assistant_pair_count": 4906,
+    "pair_rule": "for each textual assistant node, follow mapping.parent ancestry to nearest textual user ancestor",
+    "branch_lineage_preserved": true
+  },
+  "feedback_source": {
+    "google_drive_file_id": "1MP4yedkHcZdFQ8iSrnCyhPvqTS6cXVaB",
+    "file_name": "message_feedback.json",
+    "record_count_observed": 50,
+    "conversation_count_observed": 49,
+    "rating_counts": {
+      "thumbs_up": 32,
+      "thumbs_down": 18
+    },
+    "scope_boundary": "records contain conversation_id but no response message_id; do not attribute a conversation rating to a specific pair"
+  },
+  "implementation": {
+    "repository": "rafaelmeloreisnovo/RafPolimata",
+    "binder_path": "scripts/conversation_pair_binder.py",
+    "binder_commit": "4bea3b0e40ed155da0b3cd6860743ad7e2c51f3c",
+    "test_commit": "50ebf659b911025c034b066252a69368899ff47a",
+    "workflow_commit": "97648a153f1ba541ebc4b19e20a7ab5df04a571f"
+  },
+  "corpus_inventory": {
+    "declared_range": "000-050",
+    "observed_missing_shard": "018",
+    "full_corpus_bound": false,
+    "state": "PARTIAL_SOURCE_BINDING"
+  },
+  "gates": {
+    "shard000_physical_bytes_observed": true,
+    "shard000_digest_computed": true,
+    "shard000_pair_extraction_observed": true,
+    "full_000_050_pair_binding": "TOKEN_VAZIO",
+    "missing_shard_018": "TOKEN_VAZIO_PROVIDER_OBJECT",
+    "operational_metrics_per_interaction": "TOKEN_VAZIO_UNDERIVED",
+    "binder_remote_ci": "TOKEN_VAZIO_PENDING_OBSERVATION",
+    "claim_allowed": false
+  },
+  "invariants": [
+    "conversation_feedback != response_feedback",
+    "pair_binding != quality_score",
+    "thumbs_up_down != evidence_gap_risk_urgency",
+    "partial_shard_execution != full_corpus_coverage"
+  ]
+}
