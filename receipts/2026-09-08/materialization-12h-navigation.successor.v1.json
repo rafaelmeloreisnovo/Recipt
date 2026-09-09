@@ -1,0 +1,42 @@
+{
+  "schema": "RAFAELIA_MATERIALIZATION_12H_NAVIGATION_SUCCESSOR_V1",
+  "predecessor": "receipts/2026-09-08/materialization-12h-navigation.recipt.v1.json",
+  "state": "CROSS_SYSTEM_NAVIGATION_MATERIALIZED",
+  "claim_allowed": false,
+  "append_only": true,
+  "github": {
+    "mapa": {"pr":566,"commit":"92a1e8df2941f30562b9f9f98037fb064bf3001e"},
+    "blake3": {"pr":117,"commit":"3813596231cb8205c26c555d34c83fc32ce394c3"},
+    "recipt_predecessor_commit":"87d6b3082095172404ffb8e7db865e642456e990"
+  },
+  "drive": {
+    "root_path":"/RAFAELIA_ATLAS_APPEND_ONLY/2026-09-08",
+    "root_folder_id":"1ep-HQ352QTD6uIMSJVFy7nfH7gXbRpZo",
+    "checkpoint_folder_id":"1LUTb_BB_sTbjjEWVoYdlAYHRXDgsmjmK",
+    "toolmark56_folder_id":"1hEfMETCr9m6j70temgJTs1sJRKNIdZ_H",
+    "checkpoint_md_id":"1nNlllIqF4oO-IpWhCyHuX-jIWtQaF5G6",
+    "checkpoint_json_id":"1UM978-brArFtKh6-nctZfF-p24PMo5Zv",
+    "toolmark56_zip_id":"1ZukDiyUao4xk8IxyIaDoCAL1_Ec54aji",
+    "toolmark56_tar_id":"1d8XSdfgNax4KDbt93dJgwsTpf7DvqwCg",
+    "toolmark56_sha256_id":"1-MdLlWzjnHXHeoYslkdBK-YtYsgm5R0R",
+    "canonical_book_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "context_index_id":"1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk"
+  },
+  "calendar": {
+    "event_id":"5u3hrt4ed0nvafotcebcj8t7b8",
+    "color_id":"7",
+    "semantics":"TEMPORAL_INDEX_NOT_EVIDENCE_PROMOTION"
+  },
+  "gmail": {
+    "message_id":"1a0841a5c7bffa97",
+    "thread_id":"1a0841a5c7bffa97",
+    "label":"RAFAELIA/ATLAS/CHECKPOINTS",
+    "semantics":"SELF_NAVIGATION_INDEX"
+  },
+  "google_tasks": {
+    "native_write":"TOKEN_VAZIO_PROVIDER_TOOL"
+  },
+  "F_ok":["GitHub routing/custody/receipt","Drive raw custody+canonical append","Calendar temporal index","Gmail self-index+label"],
+  "F_gap":["MemRafcode final longitudinal successor","Google Tasks provider-native action","independent physical/runtime/provider evidence"],
+  "F_next":"append MemRafcode final longitudinal successor with these exact IDs; thereafter continue only from typed evidence gaps"
+}
