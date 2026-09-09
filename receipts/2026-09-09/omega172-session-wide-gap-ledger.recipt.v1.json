@@ -1,0 +1,62 @@
+{
+  "schema": "rafaelia.session-wide-gap-ledger.receipt/v1",
+  "receipt_id": "OMEGA172_SESSION_WIDE_GAP_LEDGER_20260909",
+  "date": "2026-09-09",
+  "state": "ROUTING_AND_CUSTODY_POINTER",
+  "mode": "APPEND_ONLY_FAIL_CLOSED_NO_MERGE",
+  "claim_allowed": false,
+  "absolute_completeness_claim": false,
+  "counts": {
+    "typed_gap_records_current_pass": 56,
+    "preserved_closed_or_superseded_predecessors": 7
+  },
+  "canonical_drive": {
+    "folder": "/RAFAELIA_ATLAS_APPEND_ONLY/2026-09-09/GAPS",
+    "markdown_file_id": "14cH2joV7l0yoDi-QZMmYU7adj71oiun0",
+    "json_file_id": "1ZborJzdHhq9n5qBTsWDXliBoMAvE_6bv"
+  },
+  "mapa": {
+    "repository": "rafaelmeloreisnovo/Mapa",
+    "pull_request": 569,
+    "branch": "audit/omega172-session-wide-gaps-20260909",
+    "head": "0077328cddbca13248e2b90b4478c727e31307fd",
+    "state_at_receipt": "OPEN_DRAFT_UNMERGED"
+  },
+  "memory": {
+    "repository": "rafaelmeloreisnovo/MemRafcode",
+    "pull_request": 11,
+    "branch": "memory/omega172-session-wide-gaps-20260909",
+    "head": "a80ca8f8d95295c3124d43f054f172c988a80070",
+    "state_at_receipt": "OPEN_DRAFT_UNMERGED"
+  },
+  "important_successor_delta": {
+    "fcea_omega171_git_object_leaf_recovery": "PASS_SCOPED",
+    "does_not_close": [
+      "FCEA historical bundle current bytes",
+      "FCEA alternate intact archive/missing suffix",
+      "FCEA corruption timing",
+      "FCEA canonical equivalence/supersession",
+      "Frida signing/device/runtime gates"
+    ]
+  },
+  "invariants": [
+    "HISTORICAL_GAP != DELETED_GAP",
+    "CLOSED_NARROWLY != CLOSED_GLOBALLY",
+    "STRUCTURAL_CARDINALITY != SEMANTIC_EXHAUSTIVITY",
+    "CONTROL_PLANE_ROUTE != PRODUCER_TRUTH",
+    "TOKEN_VAZIO != 0",
+    "SIMILAR_WORDING != GAP_IDENTITY"
+  ],
+  "closure_semantics": {
+    "this_receipt_closes_operational_gaps": false,
+    "this_receipt_proves_absolute_gap_exhaustivity": false,
+    "valid_next_transition": "ONE_TYPED_GAP -> AUTHORITY_MATCHED_EVIDENCE -> SUCCESSOR_RECEIPT -> INDEX -> MEMORY"
+  },
+  "authorization": {
+    "merge": false,
+    "release": false,
+    "approval": false,
+    "scientific_claim_promotion": false,
+    "physical_runtime_promotion": false
+  }
+}
