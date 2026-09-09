@@ -1,0 +1,32 @@
+{
+  "schema":"RAFAELIA_MATERIALIZATION_12H_POSTCLOSURE_AUTHORITY_SUCCESSOR_V1",
+  "predecessor":"receipts/2026-09-08/materialization-12h-navigation.final.v1.json",
+  "trigger":"NEW_TYPED_AUTHORITY_EVIDENCE",
+  "state":"AUTHORITY_ROUTING_DELTA_MATERIALIZED",
+  "append_only":true,
+  "claim_allowed":false,
+  "evidence":[
+    {
+      "repository":"instituto-Rafael/RAFAELIA_CORE",
+      "observed_contract":"FEDERATED_GOVERNANCE_CONTROL_PLANE / governance_routing_validation",
+      "source":"README.md + governance/repository_authority_manifest.v1.json",
+      "write":{"pull_request":7,"commit":"0def6aeb92c7ca92e8d06463f68a7bcde8d211b9","semantics":"governance_pointer_only"}
+    },
+    {
+      "repository":"instituto-Rafael/publicacientiespiritual",
+      "observed_contract":"documentation-governance / academic corpus index",
+      "source":"README.md",
+      "write":{"pull_request":46,"commit":"371cc3a1cba7cd36ecde2dd4d20e70ef98f656ec","semantics":"navigation_only_academic_intake"}
+    },
+    {
+      "repository":"instituto-Rafael/relativity-living-light",
+      "observed_contract":"scientific producer for RLL strong-gravity/Mpemba lane",
+      "write":"NO_WRITE_CURRENT_CHECKPOINT",
+      "reason":"no new domain-authoritative RLL scientific evidence in the 12h materialization"
+    }
+  ],
+  "invariants":["NEW_AUTHORITY_EVIDENCE_CAN_CHANGE_ROUTING","CONTROL_PLANE_ROUTE!=PRODUCER_TRUTH","INTAKE!=CLAIM_PROMOTION","NO_MASS_WRITE_BY_DISCOVERY"],
+  "F_ok":"direct contracts resolved two previously broad organization roles and produced bounded pointer/intake writes",
+  "F_gap":"remaining unclassified Instituto roles remain TOKEN_VAZIO; exhaustive org-wide inventory remains unavailable",
+  "F_next":"continue only when another repository's own contract or domain evidence changes its authority classification"
+}

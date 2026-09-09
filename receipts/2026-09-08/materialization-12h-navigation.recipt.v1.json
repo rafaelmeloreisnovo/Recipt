@@ -1,0 +1,76 @@
+{
+  "schema": "RAFAELIA_MATERIALIZATION_12H_NAVIGATION_RECEIPT_V1",
+  "window": {
+    "start": "2026-09-08T11:30:00-03:00",
+    "end": "2026-09-08T23:30:00-03:00"
+  },
+  "mode": ["APPEND_ONLY", "SOURCE_FIRST", "FAIL_CLOSED"],
+  "claim_allowed": false,
+  "invariants": [
+    "SOURCE!=ARTIFACT!=EXECUTION!=EVIDENCE!=CLAIM",
+    "REPOSITORY_OCCURRENCE!=DOMAIN_AUTHORITY",
+    "SEARCH_MISS!=ABSENCE",
+    "NO_WRITE_BY_NAME_ONLY",
+    "EMAIL_CALENDAR_INDEX!=EVIDENCE_PROMOTION",
+    "TOKEN_VAZIO!=0"
+  ],
+  "materialized_lanes": [
+    "CASA41",
+    "CORPUS_NAVIGATOR_CANONICAL_GATE",
+    "FCEA_OMEGA160_OMEGA170",
+    "SPIRAL_VECTOR_GEOMETRY",
+    "THREE_SPIRAL_CARDIAL_SLINGSHOT",
+    "TOOLMARK56_FREESTANDING_V1",
+    "GEOFLUIDS_PRESSURE_ASTROBIOLOGY_OMEGA"
+  ],
+  "github": {
+    "mapa": {
+      "branch": "atlas/materialization-12h-routing-20260908",
+      "commit": "92a1e8df2941f30562b9f9f98037fb064bf3001e",
+      "pull_request": 566,
+      "state": "DRAFT_OPEN"
+    },
+    "blake3_toolmark56": {
+      "branch": "integration/toolmark56-freestanding-20260908",
+      "commit": "3813596231cb8205c26c555d34c83fc32ce394c3",
+      "pull_request": 117,
+      "state": "DRAFT_OPEN",
+      "tar_sha256": "cb2c3f76d3fe78c88f475ab2ed363edbcff1c06f2859340b1073b7516407ff0e",
+      "zip_sha256": "369c7b86f4668836bf4e6e97ea91251429ce1dba39691c542b2836db889e4ed9"
+    }
+  },
+  "routing": {
+    "write_now": ["Mapa", "MemRafcode", "Recipt", "BLAKE3"],
+    "existing_sufficient_no_dup": ["RafGitTools", "papers", "Matem-tica-", "ChipQuantum", "frida-desktop", "CONVERSATIONS_CHUNKS_PRIVATE"],
+    "others": "TOKEN_VAZIO_ROLE_CURRENT_OR_WAIT_FOR_DOMAIN_EVIDENCE"
+  },
+  "drive": {
+    "canonical_book_id": "1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "context_index_id": "1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk",
+    "cross_system_append": "PENDING_THIS_EXECUTION",
+    "toolmark56_drive_custody": "PENDING_THIS_EXECUTION"
+  },
+  "gmail": {
+    "self_index": "PENDING_THIS_EXECUTION"
+  },
+  "calendar": {
+    "temporal_index": "PENDING_THIS_EXECUTION"
+  },
+  "google_tasks": {
+    "provider_native_write": "TOKEN_VAZIO_PROVIDER_TOOL"
+  },
+  "F_ok": [
+    "repository roles classified before writing",
+    "BLAKE3 TOOLMARK56 custody anchored reversibly",
+    "Mapa routing checkpoint anchored reversibly"
+  ],
+  "F_gap": [
+    "Drive cross-links",
+    "Gmail self-index",
+    "Calendar temporal index",
+    "MemRafcode final longitudinal successor",
+    "Toolmark56 source integration/ABI/BLAKE3/ARM32 runtime gates",
+    "independent physical/provider gates"
+  ],
+  "F_next": "materialize Drive custody and append, create Calendar index, send Gmail self-index, then append final cross-link successor in MemRafcode"
+}
