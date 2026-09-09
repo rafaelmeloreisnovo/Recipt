@@ -1,0 +1,61 @@
+{
+  "schema": "rafaelia.postmerge-state-successor.receipt/v1",
+  "receipt_id": "OMEGA173_OMEGA172_POSTMERGE_STATE_20260909",
+  "predecessor_receipt": "OMEGA172_SESSION_WIDE_GAP_LEDGER_20260909",
+  "mode": "APPEND_ONLY_FAIL_CLOSED_NO_MERGE",
+  "claim_allowed": false,
+  "absolute_completeness_claim": false,
+  "historical_predecessor_rewrite": false,
+  "observed_live_state": {
+    "mapa_pr_569": {
+      "state": "MERGED",
+      "merge_commit": "e3e2f77ba6c58c92a58fc180adbdf1d76a5fdffd",
+      "merged_at": "2026-09-09T03:44:48Z"
+    },
+    "memrafcode_pr_11": {
+      "state": "MERGED",
+      "merge_commit": "b2d39c0dfc7daadf49efd1d44f964d43dddb9cac",
+      "merged_at": "2026-09-09T03:45:37Z"
+    },
+    "recipt_pr_9": {
+      "state": "OPEN_DRAFT_UNMERGED"
+    },
+    "rafaelia_core_pr_8": {
+      "state": "OPEN_DRAFT_UNMERGED"
+    }
+  },
+  "mapa_predecessor_ci": {
+    "head": "0077328cddbca13248e2b90b4478c727e31307fd",
+    "ci_run": 34307922721,
+    "ci_conclusion": "FAILURE",
+    "markdownlint_findings": 13,
+    "md022": 12,
+    "md047": 1,
+    "promotion_control_run": 34308299342,
+    "promotion_result": "DENIED",
+    "promotion_blocking_reason": "INDEPENDENT_APPROVAL_MISSING",
+    "observed_independent_approvals": 0,
+    "required_independent_approvals": 1,
+    "automatic_merge": false,
+    "manual_merge_only": true
+  },
+  "interpretation_boundary": "Provider-observed merge state does not by itself identify the external or human authority/rationale behind the transition. No unauthorized-action inference is made.",
+  "new_gap_nodes": ["G057", "G058", "G059", "G060", "G061", "G062"],
+  "successors": {
+    "mapa_pr": 570,
+    "memrafcode_pr": 12
+  },
+  "invariants": [
+    "HISTORICAL_STATE_AT_RECEIPT != LIVE_STATE",
+    "MERGED != REVIEWED",
+    "PROMOTION_DENIED != PROVIDER_MERGE_EXPLAINED",
+    "MIXED_FEDERATED_STATE != FAILURE_BY_ITSELF",
+    "TOOL_INSTRUCTIONS_READABLE != CALLABLE_RUNTIME_ACTION"
+  ],
+  "authorization": {
+    "merge": false,
+    "release": false,
+    "approval": false
+  },
+  "next_transition": "exact-head Ω173 CI -> authority/rationale binding -> federated reroute"
+}
