@@ -1,0 +1,29 @@
+{
+  "schema":"RAFAELIA_MATERIALIZATION_12H_NAVIGATION_FINAL_V1",
+  "predecessor":"receipts/2026-09-08/materialization-12h-navigation.successor.v1.json",
+  "state":"ROUTING_SCOPE_SEALED_TYPED_GAPS_OPEN",
+  "append_only":true,
+  "claim_allowed":false,
+  "github":{
+    "mapa_pr":566,
+    "blake3_pr":117,
+    "recipt_pr":8,
+    "memrafcode_pr":10,
+    "memrafcode_commit":"221788d70fd1354b1e55470de97654d928a0bea8",
+    "task_issue":567
+  },
+  "drive":{
+    "root_folder_id":"1ep-HQ352QTD6uIMSJVFy7nfH7gXbRpZo",
+    "checkpoint_md_id":"1nNlllIqF4oO-IpWhCyHuX-jIWtQaF5G6",
+    "checkpoint_json_id":"1UM978-brArFtKh6-nctZfF-p24PMo5Zv",
+    "toolmark56_tar_id":"1d8XSdfgNax4KDbt93dJgwsTpf7DvqwCg",
+    "canonical_book_id":"1g3eVD3zLMuwk0jevAwVL3wSmxhEMkKsAUPFQh2wEn88",
+    "context_index_id":"1pQh1-OZ4ukUx-hdOLCbuu2WwgpMmZrsukTDr4IIyZvk"
+  },
+  "calendar":{"event_id":"5u3hrt4ed0nvafotcebcj8t7b8","color_id":"7"},
+  "gmail":{"root_message_id":"1a0841a5c7bffa97","successor_message_id":"1a0841c55bca9ae8","thread_id":"1a0841a5c7bffa97","label":"RAFAELIA/ATLAS/CHECKPOINTS"},
+  "google_tasks":{"native_write":"TOKEN_VAZIO_PROVIDER_TOOL"},
+  "closed_scope":["repository role routing","GitHub draft custody/routing records","Drive raw custody and canonical append","Gmail self-navigation thread","Calendar temporal index","MemRafcode longitudinal successor","GitHub issue work queue"],
+  "open_typed_gaps":["TOOLMARK56 source/ABI/BLAKE3/physical ARM32","Frida stable signer/device runtime","FCEA intact recovery","corpus full-real execution","Spiral generator source","provider enforcement/credential evidence","Google Tasks provider-native action"],
+  "stop_rule":"do not propagate generic summaries further; resume only from a new typed observable evidence delta and append a successor receipt"
+}
